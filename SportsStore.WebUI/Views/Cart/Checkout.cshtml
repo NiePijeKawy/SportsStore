@@ -1,0 +1,39 @@
+﻿@model SportsStore.Domain.Entities.ShippingDetails
+
+@{
+    ViewBag.Title = "Sklep wysyłkowy : Wysyłka";
+}
+
+<h2>Wysyłka</h2>
+
+Proszę podać swoje dane, a towar zostanie wysłany natychmiast!!
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <h3>Wysyłka dla</h3>
+    <div>NAzwisko: @Html.EditorFor(x=>x.Name)</div>
+    
+    <h3>Adres</h3>
+    <dic>Wiersz 1: @Html.EditorFor(x=>x.Line1)</dic>
+    <dic>Wiersz 2: @Html.EditorFor(x=>x.Line2)</dic>
+    <dic>Wiersz 3: @Html.EditorFor(x=>x.Line3)</dic>
+    <div>Miasto: @Html.EditorFor(x=>x.City)</div>
+    <div>Województwo : @Html.EditorFor(x=>x.State)</div>
+    <div>Kod pocztowy : @Html.EditorFor(z=>z.Zip)</div>
+    <div>Kraj : @Html.EditorFor(x=>x.Country)</div>
+    <div>Email : @Html.EditorFor(x=>x.Email)</div>
+
+
+<h3>Opcje</h3>
+<lable>
+    @Html.EditorFor(x=>x.GiftWrap)
+    Pakowanie prezentu
+</lable>
+
+    <p align="center">
+        <input class="actionButtons" type="submit" value="Zakończ zamówienie"
+    </p>
+    
+}

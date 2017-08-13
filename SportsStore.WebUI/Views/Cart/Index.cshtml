@@ -1,0 +1,49 @@
+﻿@model SportsStore.WebUI.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Koszyk zakupów</h2>
+
+<table width="90%" align="center">
+    <thead>
+        <tr>
+            <th align="center">Ilość</th>
+            <th align="left">Produkt</th>
+            <th align="right">Cena</th>
+            <th align="right">Wartość</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.Cart.Lines)
+        {
+            <tr>
+                <td align="center">@line.Quantity</td>
+                <td align="left">@line.Product.Name</td>
+                <td align="right">@line.Product.Price.ToString("c")</td>
+                <td align="right">@((line.Product.Price * line.Quantity ).ToString("c"))</td>
+                <td> 
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                     {
+                        @Html.Hidden("ProductId", line.Product.ProductId)
+                        @Html.HiddenFor(x=>x.ReturnUrl)
+                        <input class="actionButtons" type="submit" value="Usuń" />   
+                     }
+
+                </td>
+            </tr> 
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" align="right">Razem:</td>
+            <td align="right">@Model.Cart.ComputeTotalValue().ToString("c")</td>
+        </tr>
+    </tfoot>
+</table>
+
+<p align="center" class="actionButtons">
+    <a href="@Model.ReturnUrl">Kontynuuj zakupy</a>
+    @Html.ActionLink("Zamówienie","Checkout")
+</p>
